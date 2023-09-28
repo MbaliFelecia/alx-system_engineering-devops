@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# This script print "Best school" 10 time 
-# and prints hi if 9th iteration using if statement
+# Script use a while loop and if statement
 i=0
 while [ $i -le 10 ]
 do
