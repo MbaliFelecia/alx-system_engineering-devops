@@ -1,7 +1,7 @@
-#!/usr/bin/evn bash
+#!/usr/bin/env bash
 # Script that uses a nested loop to creat clock
 hour=0
-while [$hour -le 12 ]
+while [ $hour -le 12 ]
 do
 	echo "Hour: $hour"
 	minutes=1
