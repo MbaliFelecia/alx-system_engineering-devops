@@ -1,14 +1,12 @@
-#!/usr/bin/env bash
-# Puppet manifesto to make configuration changes to file
+#!/usr/bin/env puppet
+# Puppet manifest to make configuration changes to the file
 
-file { 'ect/ssh/ssh_config':
-        ensure => present,
-
-content =>"
-
-	#SSH client configuration
-	host*
-	IdentityFile ~/.ssh/school
-	PasswordAuthentication no
-	"
+file { '/etc/ssh/ssh_config':
+  ensure  => present,
+  content => "\
+# SSH client configuration
+Host *
+  IdentityFile ~/.ssh/school
+  PasswordAuthentication no
+",
 }
