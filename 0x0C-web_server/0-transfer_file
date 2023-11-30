@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#script that transfers a file from our client to a server
+# script that transfers a file from our client to a server
 # check if parameters are lest than 4
 
 if [ $# -lt 4 ]
@@ -17,7 +17,7 @@ path_to_ssh_key=$4
 
 # disable strict host checking
 
-scp -o "StrictHostKeyChecking=no" -i "$path_to_ssh_key" "$path_to_file" "$username@ip:~/"
+scp -o "StrictHostKeyChecking no" -i "$path_to_ssh_key" "$path_to_file" "$username@ip:~/"
 
 #checking if the transfer was successful
 if [ $? -eq 0 ]
