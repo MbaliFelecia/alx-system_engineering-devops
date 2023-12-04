@@ -1,6 +1,21 @@
-# Installs a Nginx server
+# Installs a Nginx server Authomatically
 
-exec {'install':
-  provider => shell,
-  command  => 'sudo apt-get -y update ; sudo apt-get -y install nginx ; echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html ; sudo sed -i "s/server_name_;/server_name_;\n\trewrite ^\/redirect_me https:\/\/github.com\/MbaliFelecia permanent;/" /etc/nginx/site-available/default ; sudo service nginx start',
+package { 'nginx':
+  ensure => installed,
+}
+
+file_line { 'install':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-enabled/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.github.com/MbaliFelecia permanent;',
+}
+
+file { '/var/www/html/index.html':
+  content => 'Hello World!',
+}
+
+service { 'nginx':
+  ensure  => running,
+  require => Package['nginx'],
 }
