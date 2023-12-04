@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 # Script that configures a new Ubuntu machine
 
+# Update the packeage before installing
 sudo apt-get update
 sudo apt-get install -y nginx
 
+# Creat an index.html page
 echo "Hello World!" | sudo tee /var/www/html/index.html
-string_for_replacement="server_name_;\n\trewrite ^\/redirect_me https:\/\/github.com\/MbaliFelecia permanent;/" /etc/nginx/sites-available/defult
-sudo sed -i "s/server_name_;/$string_for_replacement/" /etc/nginx/sites-enabled/defult
 
+# Perfor a 301 redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/MbaliFelecia permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Restart Nginx service
 sudo service nginx restart
