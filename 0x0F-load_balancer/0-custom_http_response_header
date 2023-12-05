@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Script that configures a new Ubuntu machine
+
+# Update the packeage before installing
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Creat an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Perform a 301 redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/MbaliFelecia permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Create a 404 Custom error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+# HTTP custom header response
+sudo sed -i "server_name_;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# Test configuration for error
+sudo nginx -t
+
+# Restart Nginx service
+sudo service nginx restart
