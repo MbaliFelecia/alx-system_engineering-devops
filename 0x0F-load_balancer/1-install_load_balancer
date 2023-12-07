@@ -15,8 +15,8 @@ frontend  MbaliFelecia_frontend
         default_backend MbaliFelecia_backend
 backend MbaliFelecia_backend
         balance roundrobin
-        server 277050-web-01 100.26.132.96:80 check
-        server 277050-web-02 100.26.132.96:80 check
+        server 277050-web-01 100.26.221.159:80 check
+        server 277050-web-02 18.214.89.45:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
