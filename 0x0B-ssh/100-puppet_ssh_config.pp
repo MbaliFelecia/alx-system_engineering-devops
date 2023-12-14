@@ -1,4 +1,4 @@
-#!/usr/bin/env puppet
+#!/usr/bin/env bash
 # Puppet manifest to make configuration changes to the file
 
 file { '/etc/ssh/ssh_config':
